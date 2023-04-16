@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, query } from 'express';
 import {uploadImage} from '../imgs/img.js'
-import { addImageToDatabase, allImages, deleteFullyImageByName, deleteImageFromEvent, getEventBySlug, getImagesByEventSlug, getSpecificImageByName, insertEventImage, putEventImage } from './db.js';
+import { addImageToDatabase, allImages, deleteFullyImageByName, deleteImageFromEvent, getEventBySlug, getImagesByEventSlug, getSpecificImageByName, putEventImage } from './db.js';
 import slugify from 'slugify';
 
 export async function addImage(req:Request,res:Response,next:NextFunction){
