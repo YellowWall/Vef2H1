@@ -1,10 +1,14 @@
 import util from 'util';
-import {readFile}from 'fs';
 import { v2 as cloudinary } from 'cloudinary';
 import dotenv from 'dotenv';
+import slugify from 'slugify';
 
 dotenv.config();
-cloudinary.config();
+cloudinary.config({
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.api_key,
+  api_secret: process.env.api_secret
+});
 console.log(cloudinary.config().cloud_name);
 
 
@@ -63,10 +67,10 @@ export const uploadImage = async (imagePath,name) => {
 
   try {
     // Upload the image
-    const result = await cloudinary.uploader.upload(imagePath, options);
-    console.log(result);
-    return result.public_id;
+    const result = await cloudinary.uploader.upload(imagePath, {public_id:slugify(name).toLowerCase()});
+    return result;
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
